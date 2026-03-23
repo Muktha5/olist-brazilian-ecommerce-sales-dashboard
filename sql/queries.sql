@@ -1,5 +1,7 @@
 -- Join orders, products, and payments
-
+-- =========================
+-- 1. MASTER DATA JOIN
+-- =========================
 SELECT
   o.order_id,
   o.customer_id,
