@@ -1,0 +1,11 @@
+-- Delivery days and category
+
+SELECT
+  order_id,
+  DATE_DIFF(order_delivered_customer_date, order_purchase_timestamp, DAY) AS delivery_days,
+  CASE
+    WHEN DATE_DIFF(order_delivered_customer_date, order_purchase_timestamp, DAY) <= 5 THEN 'Fast'
+    WHEN DATE_DIFF(order_delivered_customer_date, order_purchase_timestamp, DAY) <= 10 THEN 'Medium'
+    ELSE 'Slow'
+  END AS delivery_category
+FROM orders;
