@@ -2,7 +2,9 @@
 -- Tool: BigQuery
 -- Author: Muktha R
 
--- 1. Revenue by Month
+-- 1. Revenue Trend Analysis
+-- Business Question :
+-- How Has Revenue changed over month?
 
 SELECT
   EXTRACT(YEAR FROM order_purchase_timestamp) AS year,
@@ -14,8 +16,13 @@ JOIN order_payments p
 GROUP BY year, month
 ORDER BY year, month;
 
+-- INSIGHT:
+-- Revenue shows a consistent upward trend with periodic spikes,
+-- indicating possible seasonal demand patterns.
 
 -- 2. Top Product Categories
+-- Business Question :
+-- Which Product Categories Generate the Highest Revenue?
 
 SELECT
   p.product_category_name,
@@ -27,8 +34,14 @@ GROUP BY p.product_category_name
 ORDER BY total_revenue DESC
 LIMIT 10;
 
+-- INSIGHT:
+-- A few categories dominate revenue, suggesting dependency on
+-- specific product segments.
 
--- 3. Customer Orders Count
+
+-- 3. CUSTOMER ORDER BEHAVIOR
+-- BUSINESS QUESTION:
+-- Who are the most active customers based on order count?
 
 SELECT
   customer_id,
@@ -37,8 +50,14 @@ FROM orders
 GROUP BY customer_id
 ORDER BY total_orders DESC;
 
+-- INSIGHT:
+-- A small group of customers contributes to a large number of orders,
+-- indicating repeat purchase behavior.
+
 
 -- 4. Delivery Speed
+-- BUSINESS QUESTION:
+-- How fast are orders being delivered?
 
 SELECT
   order_id,
@@ -49,3 +68,7 @@ SELECT
     ELSE 'Slow'
   END AS delivery_category
 FROM orders;
+
+-- INSIGHT:
+-- Majority of deliveries fall under medium category, with fewer fast deliveries,
+-- indicating scope for logistics improvement.
